@@ -4,7 +4,7 @@ const Discord = require("discord.js"); //Discord.js Extention
 const { prefix, token, testingBot } = require("./config.json");
 const client = new Discord.Client(); //Makes The BOT's Discord Client
 //This whole set of lines was disabled for forEach being undefined; Check code on codesandbox.io
-fs.readdir("../events/*", (err, files) => {
+fs.readdir("./events", (err, files) => {
   files.forEach(file => {
     const eventHandler = require(`../events/${file}`);
     const eventName = file.split(".")[0];
@@ -12,9 +12,9 @@ fs.readdir("../events/*", (err, files) => {
   });
 });
 
-fs.readdir("../commands", (err, files) => {
+fs.readdir("./commands", (err, files) => {
   files.forEach(file => {
-    const eventHandler = require(`../events/${file}`);
+    const eventHandler = require(`./commands/${file}`);
     const eventName = file.split(".")[0];
     client.on(eventName, arg => eventHandler(client, arg));
   });
